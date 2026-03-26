@@ -70,6 +70,7 @@ export function RegisterPage() {
       {showPopup && (
         <SystemPopup
           question="Do you want to provide the following data from your wallet to Facenook?"
+          items={["First name", "Surname", "Date of birth", "Gender", "Email"]}
           yesLabel="Yes"
           noLabel="No, thanks"
           onYes={handleAutoFill}

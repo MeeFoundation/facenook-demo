@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 interface SystemPopupProps {
   question: string;
+  items?: string[];
   yesLabel?: string;
   noLabel?: string;
   onYes: () => void;
@@ -10,6 +11,7 @@ interface SystemPopupProps {
 
 export function SystemPopup({
   question,
+  items,
   yesLabel = "Yes",
   noLabel = "No",
   onYes,
@@ -127,6 +129,45 @@ export function SystemPopup({
               {question}
             </p>
           </div>
+
+          {items && items.length > 0 && (
+            <div
+              style={{
+                marginTop: 14,
+                padding: "8px 12px",
+                backgroundColor: "#fff",
+                border: "1px solid #d1d1d1",
+                borderRadius: 6,
+              }}
+            >
+              {items.map((item, i) => (
+                <div
+                  key={i}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "5px 0",
+                    borderBottom:
+                      i < items.length - 1 ? "1px solid #eee" : "none",
+                    fontSize: 12,
+                    color: "#333",
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: "50%",
+                      backgroundColor: "rgb(67 110 119)",
+                      flexShrink: 0,
+                    }}
+                  />
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div
