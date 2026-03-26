@@ -37,19 +37,17 @@ export function RegisterPage() {
     year: "",
     gender: "",
     contact: "",
-    password: "",
   });
 
   const handleAutoFill = () => {
     setForm({
       firstName: "Paul",
       surname: "Trevithick",
-      day: "15",
-      month: "6",
-      year: "1985",
+      day: "7",
+      month: "8",
+      year: "1959",
       gender: "male",
       contact: "paul.trevithick@email.com",
-      password: "",
     });
     setShowPopup(false);
   };
@@ -71,8 +69,8 @@ export function RegisterPage() {
     <>
       {showPopup && (
         <SystemPopup
-          question="Would you like to automatically fill in the registration fields?"
-          yesLabel="Yes, fill it in"
+          question="Do you want to provide the following data from your wallet to Facenook?"
+          yesLabel="Yes"
           noLabel="No, thanks"
           onYes={handleAutoFill}
           onNo={() => setShowPopup(false)}
@@ -214,18 +212,6 @@ export function RegisterPage() {
             Learn why we ask for your contact information
           </a>
         </p>
-
-        <label className="block text-sm font-semibold mb-1.5 mt-4">
-          Password
-        </label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className={inputClass}
-        />
 
         <p className="text-xs text-gray-500 mt-3 leading-relaxed">
           People who use our service may have uploaded your contact information
