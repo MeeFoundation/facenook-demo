@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SystemPopup } from "../components/SystemPopup";
 
 const currentYear = new Date().getFullYear();
 const days = Array.from({ length: 31 }, (_, i) => i + 1);
@@ -27,6 +28,7 @@ const selectClass =
 
 export function RegisterPage() {
   const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(true);
   const [form, setForm] = useState({
     firstName: "",
     surname: "",
@@ -38,6 +40,20 @@ export function RegisterPage() {
     password: "",
   });
 
+  const handleAutoFill = () => {
+    setForm({
+      firstName: "Paul",
+      surname: "Trevithick",
+      day: "15",
+      month: "6",
+      year: "1985",
+      gender: "male",
+      contact: "paul.trevithick@email.com",
+      password: "",
+    });
+    setShowPopup(false);
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
@@ -46,11 +62,23 @@ export function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate(`/reg/confirm?email=${encodeURIComponent(form.contact || "user@example.com")}`);
+    navigate(
+      `/reg/confirm?email=${encodeURIComponent(form.contact || "user@example.com")}`,
+    );
   };
 
   return (
     <>
+      {showPopup && (
+        <SystemPopup
+          question="Would you like to automatically fill in the registration fields?"
+          yesLabel="Yes, fill it in"
+          noLabel="No, thanks"
+          onYes={handleAutoFill}
+          onNo={() => setShowPopup(false)}
+        />
+      )}
+
       <button
         className="bg-transparent border-none text-[28px] cursor-pointer text-gray-800 py-2"
         onClick={() => navigate("/")}
