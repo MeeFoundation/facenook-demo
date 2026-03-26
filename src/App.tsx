@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { RegisterPage } from "./pages/RegisterPage";
 import { ConfirmPage } from "./pages/ConfirmPage";
@@ -32,7 +32,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Layout><HomePage /></Layout>} />
         <Route path="/reg" element={<Layout><RegisterPage /></Layout>} />
@@ -40,6 +40,6 @@ export default function App() {
         <Route path="/reg/welcome" element={<Layout><WelcomePage /></Layout>} />
         <Route path="/feed" element={<FeedPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
