@@ -4,23 +4,6 @@ import { Button } from "../components/Button";
 import { Logo } from "../components/Logo";
 import { SystemPopup } from "../components/SystemPopup";
 
-const currentYear = new Date().getFullYear();
-const days = Array.from({ length: 31 }, (_, i) => i + 1);
-const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-];
-const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
 
 const inputClass =
     "w-full px-3.5 py-3 border border-gray-300 rounded-lg text-[15px] outline-none focus:border-[#1877f2] focus:ring-2 focus:ring-[#1877f2]/20";
