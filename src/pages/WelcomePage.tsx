@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
+import { Logo } from "../components/Logo";
 
 export function WelcomePage() {
   const navigate = useNavigate();
@@ -6,10 +8,7 @@ export function WelcomePage() {
   return (
     <>
       <div className="flex items-center gap-1.5 mt-2 mb-6">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <circle cx="6" cy="12" r="5" stroke="#1877f2" strokeWidth="2" />
-          <circle cx="18" cy="12" r="5" stroke="#1877f2" strokeWidth="2" />
-        </svg>
+        <Logo size={24} />
         <span className="text-[15px] font-semibold text-gray-800">Facenook</span>
       </div>
 
@@ -66,12 +65,9 @@ export function WelcomePage() {
         </div>
       </div>
 
-      <button
-        className="w-full py-3.5 bg-[#1877f2] text-white rounded-lg text-base font-semibold cursor-pointer hover:bg-[#166fe5] transition-colors"
-        onClick={() => navigate("/feed")}
-      >
+      <Button variant="primary" onClick={() => navigate("/feed")}>
         Get Started
-      </button>
+      </Button>
     </>
   );
 }

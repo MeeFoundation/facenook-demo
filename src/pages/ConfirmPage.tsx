@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { Button } from "../components/Button";
 
 export function ConfirmPage() {
   const navigate = useNavigate();
@@ -30,19 +31,16 @@ export function ConfirmPage() {
           className="w-full px-3.5 py-3 border border-gray-300 rounded-lg text-[15px] outline-none focus:border-[#1877f2] focus:ring-2 focus:ring-[#1877f2]/20"
         />
 
-        <button
-          type="submit"
-          className="w-full py-3.5 mt-2 bg-[#1877f2] text-white rounded-lg text-base font-semibold cursor-pointer hover:bg-[#166fe5] transition-colors"
-        >
+        <Button type="submit" variant="primary" className="mt-2">
           Continue
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
-          className="w-full py-3.5 bg-white text-gray-800 border border-gray-300 rounded-lg text-base font-semibold cursor-pointer hover:bg-gray-50 transition-colors"
+          variant="secondary"
           onClick={() => alert("Demo — no code will be resent.")}
         >
           I didn't get the code
-        </button>
+        </Button>
       </form>
     </div>
   );

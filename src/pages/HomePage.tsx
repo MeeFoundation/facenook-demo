@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../components/Button";
+import { Logo } from "../components/Logo";
 
 export function HomePage() {
   const navigate = useNavigate();
@@ -9,10 +11,7 @@ export function HomePage() {
   return (
     <div className="pt-5">
       <div className="flex items-center gap-2 mb-8">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-          <circle cx="6" cy="12" r="5" stroke="#1877f2" strokeWidth="2" />
-          <circle cx="18" cy="12" r="5" stroke="#1877f2" strokeWidth="2" />
-        </svg>
+        <Logo size={40} />
         <span className="text-[28px] font-bold text-[#1877f2]">facenook</span>
       </div>
 
@@ -31,12 +30,9 @@ export function HomePage() {
           placeholder="Password"
           className="w-full px-3.5 py-3 border border-gray-300 rounded-lg text-[15px] outline-none focus:border-[#1877f2] focus:ring-2 focus:ring-[#1877f2]/20"
         />
-        <button
-          className="w-full py-3.5 bg-[#1877f2] text-white rounded-lg text-base font-semibold cursor-pointer hover:bg-[#166fe5] transition-colors"
-          onClick={() => navigate("/feed")}
-        >
+        <Button variant="primary" onClick={() => navigate("/feed")}>
           Log in
-        </button>
+        </Button>
         <a
           href="#"
           className="text-center text-sm text-[#1877f2] hover:underline"
