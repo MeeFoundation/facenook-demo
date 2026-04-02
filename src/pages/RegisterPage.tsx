@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import { Logo } from "../components/Logo";
+import { AgeVerifyPopup } from "../components/AgeVerifyPopup";
 import { SystemPopup } from "../components/SystemPopup";
 
 
@@ -59,19 +60,12 @@ export function RegisterPage() {
             )}
 
             {showAgePopup && (
-                <SystemPopup
-                    question="Share with Facenook"
-                    tableRows={[
-                        { label: "Source", value: "Utah SEDI certificate" },
-                        { label: "Presenting", value: "age > 13" },
-                    ]}
-                    yesLabel="Confirm"
-                    noLabel="Cancel"
-                    onYes={() => {
+                <AgeVerifyPopup
+                    onConfirm={() => {
                         setAgeVerified(true);
                         setShowAgePopup(false);
                     }}
-                    onNo={() => setShowAgePopup(false)}
+                    onCancel={() => setShowAgePopup(false)}
                 />
             )}
 
