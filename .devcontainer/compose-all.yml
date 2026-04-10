@@ -1,4 +1,4 @@
-name: node-sandbox
+name: facenook-demo-sandbox
 include:
   - path: sandcat/compose-proxy.yml
 services:
@@ -19,11 +19,11 @@ services:
       # containers should never write to this.
       - mitmproxy-config:/mitmproxy-config:ro
       # Mount the project's code
-      - ..:/workspaces/node-sandbox
+      - ..:/workspaces/facenook-demo-sandbox
       # Read-only devcontainer directory
-      - ../.devcontainer:/workspaces/node-sandbox/.devcontainer:ro
+      - ../.devcontainer:/workspaces/facenook-demo-sandbox/.devcontainer:ro
       # Read-only settings directory
-      - ../.sandcat:/workspaces/node-sandbox/.sandcat:ro
+      - ../.sandcat:/workspaces/facenook-demo-sandbox/.sandcat:ro
       # Host Claude config (optional)
       - ${HOME}/.claude/CLAUDE.md:/home/vscode/.claude/CLAUDE.md:ro
       - ${HOME}/.claude/agents:/home/vscode/.claude/agents:ro
@@ -38,7 +38,7 @@ services:
     depends_on:
       wg-client:
         condition: service_healthy
-    working_dir: /workspaces/node-sandbox
+    working_dir: /workspaces/facenook-demo-sandbox
   mitmproxy:
     volumes:
       - ../.sandcat:/config/project:ro
