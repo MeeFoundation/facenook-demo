@@ -29,9 +29,9 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
 
   return (
     <>
-      <div className="flex h-screen overflow-hidden bg-white font-public-sans">
-        <div className="relative flex-1 overflow-hidden pl-12 py-12">
-          <div className="flex items-center gap-2">
+      <div className="flex flex-col md:flex-row min-h-screen md:h-screen overflow-hidden bg-white font-public-sans max-w-360 mx-auto w-full">
+        <div className="md:flex-1 overflow-hidden flex flex-col pl-6 py-6 md:pl-12 md:py-12">
+          <div className="relative z-10 flex items-center gap-2 shrink-0">
             <div className="flex h-7.75 w-10 items-center justify-center">
               <img src={logoIcon} alt="" aria-hidden className="-rotate-90 h-10 w-8" />
             </div>
@@ -40,26 +40,27 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
             </span>
           </div>
 
-          <div className="absolute bottom-12 left-12 font-semibold text-[72px] leading-20 tracking-[0.36px] text-[#0f172a]">
-            <div>Explore</div>
-            <div>the</div>
-            <div>things</div>
-            <div>
-              <span className="text-[#1877f2]">you love</span>.
-            </div>
-          </div>
+          <img src={heroImage} alt="" aria-hidden className="md:hidden w-full h-auto mt-4" />
 
-          <div className="absolute right-0 top-1/2 h-165.5 w-124.25 -translate-y-1/2 overflow-hidden">
-            <img
-              src={heroImage}
-              alt=""
-              aria-hidden
-              className="absolute top-0 left-[-23.33%] h-full w-[133.15%] max-w-none"
-            />
+          <div className="hidden md:flex md:max-h-210 flex-1 relative flex-col justify-end">
+            <div className="absolute right-0 top-1/2 h-165.5 w-124.25 -translate-y-1/2 overflow-hidden">
+              <img
+                src={heroImage}
+                alt=""
+                aria-hidden
+                className="absolute top-0 left-[-23.33%] h-full w-[133.15%] max-w-none"
+              />
+            </div>
+            <div className="relative z-10 font-semibold text-[72px] leading-20 tracking-[0.36px] text-[#0f172a]">
+              <div>Explore</div>
+              <div>the</div>
+              <div>things</div>
+              <div><span className="text-[#1877f2]">you love</span>.</div>
+            </div>
           </div>
         </div>
 
-        <div className="flex w-145 shrink-0 flex-col items-center justify-center border-l border-[#cbd5e1] px-20 py-8">
+        <div className="flex w-full md:w-145 shrink-0 flex-col items-center justify-center border-t md:border-t-0 md:border-l border-[#cbd5e1] px-8 md:px-20 py-8">
           <div className="flex w-full flex-col gap-6">
             <h1 className="font-semibold text-2xl leading-8 tracking-[0.12px] text-[#0f172a]">
               {isRegister ? "Create a Facenook account" : "Log into Facenook"}
@@ -71,7 +72,6 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
               onChange={setSediEnabled}
             />
 
-            {/* SEDI section */}
             <div
               className="grid transition-[grid-template-rows] duration-200 ease-in-out"
               style={{ gridTemplateRows: sediEnabled ? "1fr" : "0fr" }}
@@ -107,7 +107,6 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
               </div>
             </div>
 
-            {/* Non-SEDI section */}
             <div
               className="grid transition-[grid-template-rows] duration-200 ease-in-out"
               style={{ gridTemplateRows: sediEnabled ? "0fr" : "1fr" }}
