@@ -17,7 +17,7 @@ export function RegisterPage() {
     const [showAgePopup, setShowAgePopup] = useState(false);
     const [ageVerified, setAgeVerified] = useState(false);
     const [showPrivateIdPopup, setShowPrivateIdPopup] = useState(false);
-    const [privateIdLinked, setPrivateIdLinked] = useState(false);
+    const [privateIdLinked] = useState(false);
     const [form, setForm] = useState({
         firstName: "",
         surname: "",
