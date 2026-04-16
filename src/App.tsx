@@ -1,8 +1,6 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { ConfirmPage } from "./pages/ConfirmPage";
-import { WelcomePage } from "./pages/WelcomePage";
+import { LoginPage } from "./pages/LoginPage";
 import { FeedPage } from "./pages/FeedPage";
 
 const currentYear = new Date().getFullYear();
@@ -10,7 +8,7 @@ const currentYear = new Date().getFullYear();
 function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex justify-center px-4 py-5 pb-10 font-[-apple-system,BlinkMacSystemFont,'Segoe_UI',Roboto,Helvetica,Arial,sans-serif]">
-      <div className="w-full max-w-[440px]">
+      <div className="w-full max-w-110">
         {children}
         <footer className="mt-8 border-t border-gray-200 pt-4">
           <div className="flex flex-wrap gap-x-4 gap-y-2 mb-3">
@@ -35,9 +33,8 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Layout><HomePage /></Layout>} />
-        <Route path="/reg" element={<Layout><RegisterPage /></Layout>} />
-        <Route path="/reg/confirm" element={<Layout><ConfirmPage /></Layout>} />
-        <Route path="/reg/welcome" element={<Layout><WelcomePage /></Layout>} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/reg" element={<LoginPage mode="register" />} />
         <Route path="/feed" element={<FeedPage />} />
       </Routes>
     </HashRouter>

@@ -1,279 +1,159 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./Button";
-
-interface TableRow {
-    label: string;
-    value: string;
-}
+import { Input } from "./Input";
+import { SelectField } from "./SelectField";
+import { PrivoBadge } from "./PrivoBadge";
+import mWordmark from "../assets/mee-wordmark-m.svg";
+import e1Wordmark from "../assets/mee-wordmark-e1.svg";
+import e2Wordmark from "../assets/mee-wordmark-e2.svg";
+import questionCircle from "../assets/icon-question-circle.svg";
 
 interface SystemPopupProps {
-    question: string;
-    items?: string[];
-    tableRows?: TableRow[];
-    yesLabel?: string;
-    noLabel?: string;
-    onYes: () => void;
-    onNo: () => void;
+  sediId?: string;
+  firstName?: string;
+  lastName?: string;
+  gender?: string;
+  onCancel: () => void;
+  onSubmit: () => void;
+}
+
+function MeeWordmark() {
+  return (
+    <div className="relative h-5 w-17 shrink-0">
+      <div className="absolute" style={{ inset: "0.5% 58.33% 0.76% 0" }}>
+        <img src={mWordmark} alt="" className="absolute block inset-0 max-w-none size-full" />
+      </div>
+      <div className="absolute" style={{ inset: "0.72% 29.23% 1.14% 43.59%" }}>
+        <img src={e1Wordmark} alt="" className="absolute block inset-0 max-w-none size-full" />
+      </div>
+      <div className="absolute" style={{ inset: "0.72% 0.13% 1.14% 72.69%" }}>
+        <img src={e2Wordmark} alt="" className="absolute block inset-0 max-w-none size-full" />
+      </div>
+    </div>
+  );
+}
+
+function FieldLabel({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-1 px-0.5 h-4">
+      {children}
+    </div>
+  );
 }
 
 export function SystemPopup({
-    question,
-    items,
-    tableRows,
-    yesLabel = "Yes",
-    noLabel = "No",
-    onYes,
-    onNo,
+  sediId = "",
+  firstName = "",
+  lastName = "",
+  gender = "",
+  onCancel,
+  onSubmit,
 }: SystemPopupProps) {
-    useEffect(() => {
-        const handleKey = (e: KeyboardEvent) => {
-            if (e.key === "Escape") onNo();
-            if (e.key === "Enter") onYes();
-        };
-        window.addEventListener("keydown", handleKey);
-        return () => window.removeEventListener("keydown", handleKey);
-    }, [onYes, onNo]);
+  const [selectedGender, setSelectedGender] = useState(gender);
+  const [firstNameValue, setFirstNameValue] = useState(firstName);
+  const [lastNameValue, setLastNameValue] = useState(lastName);
+  const [isLoading, setIsLoading] = useState(false);
 
-    return (
-        <div
-            style={{
-                position: "fixed",
-                inset: 0,
-                zIndex: 9999,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "rgba(0, 0, 0, 0.4)",
-            }}
-        >
-            <div
-                style={{
-                    width: 360,
-                    backgroundColor: "#f0f0f0",
-                    border: "1px solid #999",
-                    borderRadius: 8,
-                    boxShadow:
-                        "0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.08)",
-                    fontFamily:
-                        '-apple-system, "Segoe UI", system-ui, BlinkMacSystemFont, sans-serif',
-                    overflow: "hidden",
-                }}
-            >
-                <div
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 8,
-                        padding: "10px 14px",
-                        borderBottom: "1px solid #d1d1d1",
-                        background:
-                            "linear-gradient(to bottom, #fafafa, #e8e8e8)",
-                    }}
-                >
-                    <div
-                        style={{
-                            width: 14,
-                            height: 14,
-                            borderRadius: "50%",
-                            background:
-                                "linear-gradient(to bottom, #ff6058, #e0443e)",
-                            border: "1px solid #d94039",
-                        }}
-                    />
-                    <div
-                        style={{
-                            width: 14,
-                            height: 14,
-                            borderRadius: "50%",
-                            background:
-                                "linear-gradient(to bottom, #ffbd2e, #dea123)",
-                            border: "1px solid #cfa01e",
-                        }}
-                    />
-                    <div
-                        style={{
-                            width: 14,
-                            height: 14,
-                            borderRadius: "50%",
-                            background:
-                                "linear-gradient(to bottom, #27c93f, #1aab29)",
-                            border: "1px solid #14982a",
-                        }}
-                    />
-                    <span
-                        style={{
-                            flex: 1,
-                            textAlign: "center",
-                            fontSize: 13,
-                            fontWeight: 600,
-                            color: "#4a4a4a",
-                            marginRight: 46,
-                        }}
-                    ></span>
-                </div>
+  function handleSubmit() {
+    setIsLoading(true);
+    setTimeout(() => onSubmit(), 1500);
+  }
 
-                <div style={{ padding: "20px 24px 16px" }}>
-                    <div
-                        style={{
-                            display: "flex",
-                            gap: 14,
-                            alignItems: "center",
-                        }}
-                    >
-                        <div
-                            style={{
-                                width: 40,
-                                height: 40,
-                                borderRadius: 8,
-                                backgroundColor: "rgb(67 110 119)",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                flexShrink: 0,
-                            }}
-                        >
-                            <span
-                                style={{
-                                    color: "#fff",
-                                    fontSize: 22,
-                                    fontWeight: 700,
-                                }}
-                            >
-                                ?
-                            </span>
-                        </div>
-                        <p
-                            style={{
-                                margin: 0,
-                                fontSize: 13,
-                                lineHeight: 1.5,
-                                color: "#1a1a1a",
-                            }}
-                        >
-                            {question}
-                        </p>
-                    </div>
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+      if (e.key === "Enter") onSubmit();
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [onCancel, onSubmit]);
 
-                    {tableRows && tableRows.length > 0 && (
-                        <table
-                            style={{
-                                marginTop: 14,
-                                width: "100%",
-                                borderCollapse: "separate",
-                                borderSpacing: 0,
-                                backgroundColor: "rgb(67 110 119)",
-                                border: "1px solid rgb(67 110 119)",
-                                borderRadius: 6,
-                                overflow: "hidden",
-                                fontSize: 12,
-                            }}
-                        >
-                            <tbody>
-                                {tableRows.map((row, i) => (
-                                    <tr
-                                        key={i}
-                                        style={{
-                                            borderBottom: "none",
-                                        }}
-                                    >
-                                        <td
-                                            style={{
-                                                padding: "7px 12px",
-                                                color: "#fff",
-                                                fontWeight: 500,
-                                                whiteSpace: "nowrap",
-                                                backgroundColor:
-                                                    "rgb(67 110 119)",
-                                                borderBottom:
-                                                    i < tableRows.length - 1
-                                                        ? "1px solid rgba(255,255,255,0.3)"
-                                                        : "none",
-                                            }}
-                                        >
-                                            {row.label}
-                                        </td>
-                                        <td
-                                            style={{
-                                                padding: "7px 12px",
-                                                color: "#1a1a1a",
-                                                fontWeight: 600,
-                                                backgroundColor: "#fff",
-                                                borderBottom:
-                                                    i < tableRows.length - 1
-                                                        ? "1px solid rgb(67 110 119)"
-                                                        : "none",
-                                                maxWidth: 200,
-                                                overflow: "hidden",
-                                                textOverflow: "ellipsis",
-                                                whiteSpace: "nowrap",
-                                            }}
-                                        >
-                                            {row.value}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    )}
+  return (
+    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/40">
+      <div className="bg-white rounded-xl w-126 max-h-[calc(100vh-32px)] overflow-y-auto font-public-sans">
+        <div className="flex flex-col gap-6 px-8 py-8">
 
-                    {items && items.length > 0 && (
-                        <div
-                            style={{
-                                marginTop: 14,
-                                padding: "8px 12px",
-                                backgroundColor: "#fff",
-                                border: "1px solid #d1d1d1",
-                                borderRadius: 8,
-                            }}
-                        >
-                            {items.map((item, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: 8,
-                                        padding: "5px 0",
-                                        borderBottom:
-                                            i < items.length - 1
-                                                ? "1px solid #eee"
-                                                : "none",
-                                        fontSize: 12,
-                                        color: "#333",
-                                    }}
-                                >
-                                    <span
-                                        style={{
-                                            width: 6,
-                                            height: 6,
-                                            borderRadius: "50%",
-                                            backgroundColor: "rgb(67 110 119)",
-                                            flexShrink: 0,
-                                        }}
-                                    />
-                                    {item}
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
+          {/* Header: logo + cancel */}
+          <div className="flex items-center justify-between">
+            <MeeWordmark />
+            <Button variant="cancel" onClick={onCancel}>Cancel</Button>
+          </div>
 
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        gap: 8,
-                        padding: "8px 24px 18px",
-                    }}
-                >
-                    <Button variant="popup-secondary" onClick={onNo}>
-                        {noLabel}
-                    </Button>
-                    <Button variant="popup-primary" onClick={onYes}>
-                        {yesLabel}
-                    </Button>
-                </div>
+          {/* Title */}
+          <h2 className="font-semibold text-xl leading-7.5 tracking-[0.1px] text-[#0f172a]">
+            To create an account Facenook needs the following info
+          </h2>
+
+          {/* SEDI ID */}
+          <div className="flex flex-col gap-0.5">
+            <div className="flex flex-col gap-2">
+              <FieldLabel>
+                <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">SEDI ID</span>
+                <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0" />
+              </FieldLabel>
+              <Input value={sediId} readOnly className="overflow-hidden whitespace-nowrap text-ellipsis" />
             </div>
+            <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#475569] px-0.5">
+              A Private ID is a site-specific pseudonym — a unique identifier generated just for this site, so you can register without revealing your real identity or contact information.{" "}
+              <a href="#" className="text-[#3b5b63] underline decoration-solid">Learn more</a>.
+            </p>
+          </div>
+
+          {/* Age verification */}
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-1 px-0.5">
+              <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">Age ≥ 13 years old</span>
+              <PrivoBadge />
+              <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0" />
+            </div>
+            <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#475569] px-0.5">
+              PRIVO verifies you meet the age requirement without revealing your date of birth.
+            </p>
+          </div>
+
+          {/* First name + Last name */}
+          <div className="flex gap-4">
+            <div className="flex flex-col gap-2 flex-1 min-w-0">
+              <FieldLabel>
+                <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">First name</span>
+              </FieldLabel>
+              <Input value={firstNameValue} onChange={e => setFirstNameValue(e.target.value)} />
+            </div>
+            <div className="flex flex-col gap-2 flex-1 min-w-0">
+              <FieldLabel>
+                <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">Last name</span>
+              </FieldLabel>
+              <Input value={lastNameValue} onChange={e => setLastNameValue(e.target.value)} />
+            </div>
+          </div>
+
+          {/* Gender */}
+          <SelectField
+            label="Gender"
+            showTooltip
+            value={selectedGender}
+            onChange={setSelectedGender}
+            options={[
+              { value: "female", label: "Female" },
+              { value: "male", label: "Male" },
+              { value: "other", label: "Other" },
+              { value: "prefer_not", label: "Prefer not to say" },
+            ]}
+          />
+
+          {/* Submit */}
+          <Button variant="sedi-gradient" onClick={handleSubmit} disabled={isLoading} className="flex items-center justify-center gap-2">
+            {isLoading && (
+              <svg className="animate-spin size-4 shrink-0" viewBox="0 0 24 24" fill="none">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+              </svg>
+            )}
+            {isLoading ? "Creating account…" : "Create account"}
+          </Button>
+
         </div>
-    );
+      </div>
+    </div>
+  );
 }

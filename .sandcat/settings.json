@@ -4,6 +4,10 @@
       "action": "allow",
       "host": "*",
       "method": "GET"
+    },
+    {
+      "action": "allow",
+      "host": "*.figma.com"
     }
   ]
 }

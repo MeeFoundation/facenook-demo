@@ -42,20 +42,12 @@ export function RegisterPage() {
         <>
             {showPrivateIdPopup && (
                 <SystemPopup
-                    question="Share Private ID with Facenook"
-                    tableRows={[
-                        {
-                            label: "Keri AID",
-                            value: "1F26AD521903BD1053829FA7D92394889178937DBF",
-                        },
-                    ]}
-                    yesLabel="Confirm"
-                    noLabel="Cancel"
-                    onYes={() => {
-                        setPrivateIdLinked(true);
-                        setShowPrivateIdPopup(false);
-                    }}
-                    onNo={() => setShowPrivateIdPopup(false)}
+                    sediId="1F26AD521903BD1053829FA7D92394889178937DBF"
+                    firstName={form.firstName}
+                    lastName={form.surname}
+                    gender={form.gender}
+                    onSubmit={() => navigate("/")}
+                    onCancel={() => setShowPrivateIdPopup(false)}
                 />
             )}
 

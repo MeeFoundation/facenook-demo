@@ -1,1 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --font-public-sans: 'Public Sans', sans-serif;
+  --animate-fade-in-up: fade-in-up 0.2s ease-out;
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+:root {
+  interpolate-size: allow-keywords;
+}
+
+
