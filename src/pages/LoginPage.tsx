@@ -30,7 +30,7 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
   return (
     <>
       <div className="flex flex-col md:flex-row min-h-screen md:h-screen overflow-hidden bg-white font-public-sans max-w-360 mx-auto w-full">
-        <div className="md:flex-1 overflow-hidden flex flex-col pl-6 py-6 md:pl-12 md:py-12">
+        <div className="md:flex-1 overflow-hidden flex flex-col pl-6 py-6 md:p-12 md:py-12">
           <div className="relative z-10 flex items-center gap-2 shrink-0">
             <div className="flex h-7.75 w-10 items-center justify-center">
               <img src={logoIcon} alt="" aria-hidden className="-rotate-90 h-10 w-8" />

@@ -45,7 +45,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   "sedi-gradient":
     "w-full py-[10px] bg-[linear-gradient(112.89deg,rgb(59,91,99)_0%,rgb(79,134,142)_100%)] text-white border border-[#4f868e] rounded-xl text-base font-semibold leading-6 tracking-[0.08px] font-public-sans cursor-pointer hover:opacity-90 transition-opacity",
   cancel:
-    "py-[7px] px-3 bg-[#f8fafc] text-[#334155] border border-[#cbd5e1] rounded-xl text-xs font-semibold leading-4 tracking-[0.06px] font-public-sans cursor-pointer hover:bg-[#f1f5f9] transition-colors",
+    "py-[7px] px-[18px] bg-[#f8fafc] text-[#334155] border border-[#cbd5e1] rounded-xl text-xs font-semibold leading-4 tracking-[0.06px] font-public-sans cursor-pointer hover:bg-[#f1f5f9] transition-colors",
 };
 
 export function Button({

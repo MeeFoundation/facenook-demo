@@ -3,6 +3,7 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { SelectField } from "./SelectField";
 import { PrivoBadge } from "./PrivoBadge";
+import { Tooltip } from "./Tooltip";
 import mWordmark from "../assets/mee-wordmark-m.svg";
 import e1Wordmark from "../assets/mee-wordmark-e1.svg";
 import e2Wordmark from "../assets/mee-wordmark-e2.svg";
@@ -70,7 +71,7 @@ export function SystemPopup({
 
   return (
     <div className="fixed inset-0 z-9999 flex items-center justify-center bg-black/40">
-      <div className="bg-white rounded-xl w-126 max-h-[calc(100vh-32px)] overflow-y-auto font-public-sans">
+      <div className="bg-white rounded-xl w-160 max-h-[calc(100vh-32px)] overflow-y-auto font-public-sans">
         <div className="flex flex-col gap-6 px-8 py-8">
 
           {/* Header: logo + cancel */}
@@ -81,17 +82,21 @@ export function SystemPopup({
 
           {/* Title */}
           <h2 className="font-semibold text-xl leading-7.5 tracking-[0.1px] text-[#0f172a]">
-            To create an account Facenook needs the following info
+            To create an account Facenook needs the following:
           </h2>
 
           {/* SEDI ID */}
-          <div className="flex flex-col gap-0.5">
-            <div className="flex flex-col gap-2">
-              <FieldLabel>
-                <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">SEDI ID</span>
-                <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0" />
-              </FieldLabel>
-              <Input value={sediId} readOnly className="overflow-hidden whitespace-nowrap text-ellipsis" />
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center h-4 px-0.5">
+              <p className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b] whitespace-nowrap overflow-hidden text-ellipsis">
+                {"SEDI ID: "}
+                <span className="font-bold">{sediId}</span>
+              </p>
+              <Tooltip text="A Private ID is a site-specific pseudonym — a unique identifier generated just for this site, so you can register without revealing your real identity.">
+                <div className="flex items-center pl-1 shrink-0">
+                  <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0 cursor-help" />
+                </div>
+              </Tooltip>
             </div>
             <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#475569] px-0.5">
               A Private ID is a site-specific pseudonym — a unique identifier generated just for this site, so you can register without revealing your real identity or contact information.{" "}
@@ -102,9 +107,11 @@ export function SystemPopup({
           {/* Age verification */}
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-1 px-0.5">
-              <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">Age ≥ 13 years old</span>
+              <span className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b]">Age ≥ 13 years old. Verified by</span>
               <PrivoBadge />
-              <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0" />
+              <Tooltip text="PRIVO verifies you meet the age requirement without revealing your date of birth.">
+                <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0 cursor-help" />
+              </Tooltip>
             </div>
             <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#475569] px-0.5">
               PRIVO verifies you meet the age requirement without revealing your date of birth.
@@ -131,6 +138,7 @@ export function SystemPopup({
           <SelectField
             label="Gender"
             showTooltip
+            tooltipText="Your gender may be used to personalize your experience on this site."
             value={selectedGender}
             onChange={setSelectedGender}
             options={[

@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
 import questionCircle from "../assets/icon-question-circle.svg";
+import { Tooltip } from "./Tooltip";
 
 export interface SelectFieldOption {
   value: string;
@@ -10,12 +11,13 @@ export interface SelectFieldOption {
 interface SelectFieldProps {
   label: string;
   showTooltip?: boolean;
+  tooltipText?: string;
   value: string;
   onChange?: (value: string) => void;
   options: SelectFieldOption[];
 }
 
-export function SelectField({ label, showTooltip = false, value, onChange, options }: SelectFieldProps) {
+export function SelectField({ label, showTooltip = false, tooltipText, value, onChange, options }: SelectFieldProps) {
   const [open, setOpen] = useState(false);
   const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -54,9 +56,11 @@ export function SelectField({ label, showTooltip = false, value, onChange, optio
           {label}
         </span>
         {showTooltip && (
-          <div className="flex items-center pl-1">
-            <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0" />
-          </div>
+          <Tooltip text={tooltipText ?? ""}>
+            <div className="flex items-center pl-1">
+              <img src={questionCircle} alt="" aria-hidden className="size-4 shrink-0 cursor-help" />
+            </div>
+          </Tooltip>
         )}
       </div>
       <button
