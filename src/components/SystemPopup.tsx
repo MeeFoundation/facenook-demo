@@ -89,7 +89,7 @@ export function SystemPopup({
           <div className="flex flex-col gap-2">
             <div className="flex items-center h-4 px-0.5">
               <p className="text-base font-normal leading-6 tracking-[0.08px] text-[#1e293b] whitespace-nowrap overflow-hidden text-ellipsis">
-                {"SEDI ID: "}
+                {"Private ID: "}
                 <span className="font-bold">{sediId}</span>
               </p>
               <Tooltip text="A Private ID is a site-specific pseudonym — a unique identifier generated just for this site, so you can register without revealing your real identity.">
