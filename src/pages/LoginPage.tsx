@@ -67,8 +67,8 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
             </h1>
 
             <Toggle
-              label="Enable SEDI Experience"
-              description="Register on Facenook without revealing your real identity or contact information."
+              label="Enable SEDI"
+              description={isRegister ? "Create an account on Facenook using your SEDI ID - simple one tap experience" : "Log in to Facenook using your SEDI ID - simple one tap experience"}
               onChange={setSediEnabled}
             />
 
