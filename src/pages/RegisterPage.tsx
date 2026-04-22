@@ -268,7 +268,7 @@ export function RegisterPage() {
                         </p>
 
                         <button
-                            type="submit"
+                            type="button"
                             onClick={() => navigate("/")}
                             className="w-full py-3.5 mt-5 bg-[#1877f2] text-white rounded-lg text-base font-semibold cursor-pointer hover:bg-[#166fe5] transition-colors"
                         >
