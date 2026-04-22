@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { FeedPage } from "./pages/FeedPage";
+import { ConfigurePage } from "./pages/ConfigurePage";
 
 const currentYear = new Date().getFullYear();
 
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/reg" element={<LoginPage mode="register" />} />
         <Route path="/feed" element={<FeedPage />} />
+        <Route path="/configure" element={<ConfigurePage />} />
       </Routes>
     </HashRouter>
   );

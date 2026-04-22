@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAtomValue } from "jotai";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { SystemPopup } from "../components/SystemPopup";
-import { Toggle } from "../components/Toggle";
+import { walletTypeAtom } from "../store/demoConfig";
 
 import logoIcon from "../assets/mee-logo.svg";
 import heroImage from "../assets/login-hero.png";
@@ -14,13 +15,14 @@ interface LoginPageProps {
 
 export function LoginPage({ mode = "login" }: LoginPageProps) {
   const navigate = useNavigate();
+  const walletType = useAtomValue(walletTypeAtom);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [sediEnabled, setSediEnabled] = useState(false);
   const [showSediPopup, setShowSediPopup] = useState(false);
+  const [sediLoading, setSediLoading] = useState(false);
 
   const isRegister = mode === "register";
-  const [sediLoading, setSediLoading] = useState(false);
+  const sediActive = walletType === "A" || walletType === "C";
 
   function handleSediLogin() {
     setSediLoading(true);
@@ -66,84 +68,75 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
               {isRegister ? "Create a Facenook account" : "Log into Facenook"}
             </h1>
 
-            <Toggle
-              label="Enable SEDI"
-              description={isRegister ? "Create an account on Facenook using your SEDI ID - simple one tap experience" : "Log in to Facenook using your SEDI ID - simple one tap experience"}
-              onChange={setSediEnabled}
-            />
+            {sediActive ? (
+              <>
+                {!isRegister && (
+                  <Button
+                    variant="sedi-primary"
+                    onClick={handleSediLogin}
+                    disabled={sediLoading}
+                    className="flex items-center justify-center gap-2"
+                  >
+                    {sediLoading && (
+                      <svg className="animate-spin size-4 shrink-0" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                    )}
+                    {sediLoading ? "Logging in…" : "Log in with SEDI"}
+                  </Button>
+                )}
 
-            <div
-              className="grid transition-[grid-template-rows] duration-200 ease-in-out"
-              style={{ gridTemplateRows: sediEnabled ? "1fr" : "0fr" }}
-            >
-              <div className="overflow-hidden">
-                <div className={`flex flex-col gap-6 transition-opacity duration-150 ${sediEnabled ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
-                  {!isRegister && (
-                    <Button variant="sedi-primary" onClick={handleSediLogin} disabled={sediLoading} className="flex items-center justify-center gap-2">
-                      {sediLoading && (
-                        <svg className="animate-spin size-4 shrink-0" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                        </svg>
-                      )}
-                      {sediLoading ? "Logging in…" : "Log in with SEDI"}
-                    </Button>
-                  )}
-
-                  {isRegister && (
-                    <div className="flex flex-col gap-3">
-                      <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#0f172a]">
-                        By tapping <strong>Create an account with SEDI</strong>, you agree to create an account and to Facenook's{" "}
-                        <strong><a href="#" className="text-[#1877f2]">Terms</a></strong>,{" "}
-                        <strong><a href="#" className="text-[#1877f2]">Privacy Policy</a></strong> and{" "}
-                        <strong><a href="#" className="text-[#1877f2]">Cookies Policy</a></strong>.
-                        <br /><br />
-                        The <strong><a href="#" className="text-[#1877f2]">Privacy Policy</a></strong> describes the ways we can use the information we collect when you create an account. For example, we use this information to provide, personalize and improve our products, including ads.
-                      </p>
-                      <Button variant="sedi-secondary" onClick={() => setShowSediPopup(true)}>Create new account</Button>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="grid transition-[grid-template-rows] duration-200 ease-in-out"
-              style={{ gridTemplateRows: sediEnabled ? "0fr" : "1fr" }}
-            >
-              <div className="overflow-hidden">
-                <div className={`flex flex-col gap-6 transition-opacity duration-150 ${sediEnabled ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
+                {isRegister && (
                   <div className="flex flex-col gap-3">
-                    <Input
-                      inputSize="md"
-                      type="text"
-                      placeholder="Email or mobile number"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <Input
-                      inputSize="md"
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <p className="text-xs font-normal leading-4 tracking-[0.06px] text-[#0f172a]">
+                      By tapping <strong>Create an account with SEDI</strong>, you agree to create an account and to Facenook's{" "}
+                      <strong><a href="#" className="text-[#1877f2]">Terms</a></strong>,{" "}
+                      <strong><a href="#" className="text-[#1877f2]">Privacy Policy</a></strong> and{" "}
+                      <strong><a href="#" className="text-[#1877f2]">Cookies Policy</a></strong>.
+                      <br /><br />
+                      The <strong><a href="#" className="text-[#1877f2]">Privacy Policy</a></strong> describes the ways we can use the information we collect when you create an account. For example, we use this information to provide, personalize and improve our products, including ads.
+                    </p>
+                    <Button variant="sedi-secondary" onClick={() => setShowSediPopup(true)}>
+                      Create an account with SEDI
+                    </Button>
                   </div>
-
-                  <div className="flex flex-col gap-2">
-                    <Button variant="mee-primary">Log in</Button>
-                    <Button variant="mee-text">Forgot password?</Button>
-                  </div>
-
-                  {isRegister && (
-                    <>
-                      <hr className="border-[#cbd5e1]" />
-                      <Button variant="mee-secondary" onClick={() => setShowSediPopup(true)}>Create new account</Button>
-                    </>
-                  )}
+                )}
+              </>
+            ) : (
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-3">
+                  <Input
+                    inputSize="md"
+                    type="text"
+                    placeholder="Email or mobile number"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <Input
+                    inputSize="md"
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
+
+                <div className="flex flex-col gap-2">
+                  <Button variant="mee-primary">Log in</Button>
+                  <Button variant="mee-text">Forgot password?</Button>
+                </div>
+
+                {isRegister && (
+                  <>
+                    <hr className="border-[#cbd5e1]" />
+                    <Button variant="mee-secondary" onClick={() => setShowSediPopup(true)}>
+                      Create new account
+                    </Button>
+                  </>
+                )}
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
