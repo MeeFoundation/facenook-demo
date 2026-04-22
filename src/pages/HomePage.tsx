@@ -41,7 +41,7 @@ export function HomePage() {
         </a>
         <hr className="border-gray-200 my-1" />
         <Link
-          to="/reg"
+          to="/regpage"
           className="block text-center py-3.5 bg-[#42b72a] text-white rounded-lg text-base font-semibold hover:bg-[#36a420] transition-colors no-underline"
         >
           Create new account

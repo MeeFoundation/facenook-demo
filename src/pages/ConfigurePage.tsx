@@ -35,7 +35,7 @@ export function ConfigurePage() {
   const [demoFlow, setDemoFlow] = useAtom(demoFlowAtom);
 
   function handleStart() {
-    navigate(demoFlow === "1" ? "/reg" : "/login");
+    navigate(demoFlow === "1" ? "/regpage" : "/loginpage");
   }
 
   return (

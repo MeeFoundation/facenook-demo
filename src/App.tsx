@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate, Link, useLocation } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 import { FeedPage } from "./pages/FeedPage";
@@ -65,6 +65,19 @@ function Layout({ children }: { children: React.ReactNode }) {
     );
 }
 
+function RestartLink() {
+    const { pathname } = useLocation();
+    if (pathname === "/configure") return null;
+    return (
+        <Link
+            to="/configure"
+            className="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-gray-800 text-white text-sm rounded-full hover:bg-gray-700 transition-colors no-underline z-50"
+        >
+            Restart Demo
+        </Link>
+    );
+}
+
 export default function App() {
     return (
         <HashRouter>
@@ -77,12 +90,15 @@ export default function App() {
                         </Layout>
                     }
                 />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/reg" element={<LoginPage mode="register" />} />
-                <Route path="/reg/form" element={<RegisterPage />} />
+                <Route path="/loginpage" element={<LoginPage />} />
+                <Route path="/regpage" element={<LoginPage mode="register" />} />
+                <Route path="/regpage/form" element={<RegisterPage />} />
+                <Route path="/login" element={<Navigate to="/configure" replace />} />
+                <Route path="/reg" element={<Navigate to="/configure" replace />} />
                 <Route path="/feed" element={<FeedPage />} />
                 <Route path="/configure" element={<ConfigurePage />} />
             </Routes>
+            <RestartLink />
         </HashRouter>
     );
 }

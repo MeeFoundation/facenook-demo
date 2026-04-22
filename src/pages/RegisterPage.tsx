@@ -48,7 +48,7 @@ export function RegisterPage() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         navigate(
-            `/reg/confirm?email=${encodeURIComponent(form.contact || "user@example.com")}`,
+            `/regpage/confirm?email=${encodeURIComponent(form.contact || "user@example.com")}`,
         );
     };
 
@@ -277,7 +277,7 @@ export function RegisterPage() {
                         <button
                             type="button"
                             className="w-full py-3.5 mt-2.5 bg-white text-gray-800 border border-gray-300 rounded-lg text-base font-semibold cursor-pointer hover:bg-gray-50 transition-colors"
-                            onClick={() => navigate("/login")}
+                            onClick={() => navigate("/loginpage")}
                         >
                             I already have an account
                         </button>

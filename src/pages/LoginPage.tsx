@@ -222,7 +222,7 @@ export function LoginPage({ mode = "login" }: LoginPageProps) {
                                         <Button
                                             variant="mee-secondary"
                                             onClick={() =>
-                                                navigate("/reg/form")
+                                                navigate("/regpage/form")
                                             }
                                         >
                                             Create new account

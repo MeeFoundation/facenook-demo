@@ -10,7 +10,7 @@ export function ConfirmPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    navigate("/reg/welcome");
+    navigate("/regpage/welcome");
   };
 
   return (
